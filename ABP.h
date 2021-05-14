@@ -10,6 +10,10 @@ typedef struct _arvore {
 
 Arvore* cria_arv_vazia ();
 void imprime_decrescente (Arvore *a);
+int min (Arvore *a);
+
+int max (Arvore *a);
+void imprime_decrescente (Arvore *a);
 
 /*typedef struct NO* ArvBin;
 int insere_ArvBin(ArvBin *raiz, int valor);
