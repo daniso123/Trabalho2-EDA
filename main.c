@@ -41,10 +41,6 @@ int main()
                 printf("Arquivo aberto com sucesso!\n");
                 ABP = fopen("ABP.csv", "w");
 
-               // printf("Digite a chave: \n");
-
-                //scanf("%d\n", &n);
-                //a = inserir(a, n);
                 a = inserir(a, 40);
                 a = inserir(a, 54);
                 a = inserir(a, 1082);
@@ -69,7 +65,7 @@ int main()
             scanf("%s", fileName);
             break;
         case 'C':
-            imprime_decrescente(a);
+            imprime_crescente(a);
             break;
         }
 

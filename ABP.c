@@ -100,12 +100,12 @@ Arvore *Remover(Arvore *a, int v)
     }
     return a;
 }
-void imprime_decrescente(Arvore *arv)
+void imprime_crescente(Arvore *arv)
 {
     if (arv != NULL)
     {
-        printf("%d, ", max(arv));
-        imprime_decrescente(Remover(arv, max(arv)));
+        printf("%d, ", min(arv));
+        imprime_decrescente(Remover(arv, min(arv)));
     }
 }
 /*
