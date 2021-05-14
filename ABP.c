@@ -12,41 +12,41 @@ Arvore *inserir(Arvore *a, int v)
     if (a == NULL)
     {
         a = (Arvore *)malloc(sizeof(Arvore));
-        a->info = v;
-        a->esq = NULL;
-        a->dir = NULL;
+        a->chave = v;
+        a->pEsq = NULL;
+        a->pDir = NULL;
     }
-    else if (v < a->info)
+    else if (v < a->chave)
     {
-        a->esq = inserir(a->esq, v);
+        a->pEsq = inserir(a->pEsq, v);
     }
     else
     {
-        a->dir = inserir(a->dir, v);
+        a->pDir = inserir(a->pDir, v);
     }
     return a;
 }
 int min(Arvore *a)
 {
-    if (a->esq != NULL)
+    if (a->pEsq != NULL)
     {
-        return min(a->esq);
+        return min(a->pEsq);
     }
     else
     {
-        return a->info;
+        return a->chave;
     }
 }
 
 int max(Arvore *a)
 {
-    if (a->dir != NULL)
+    if (a->pDir != NULL)
     {
-        return max(a->dir);
+        return max(a->pDir);
     }
     else
     {
-        return a->info;
+        return a->chave;
     }
 }
 
@@ -58,43 +58,43 @@ Arvore *Remover(Arvore *a, int v)
     }
     else
     {
-        if (a->info > v)
+        if (a->chave > v)
         {
-            a->esq = Remover(a->esq, v);
+            a->pEsq = Remover(a->pEsq, v);
         }
-        else if (a->info < v)
+        else if (a->chave < v)
         {
-            a->dir = Remover(a->dir, v);
+            a->pDir = Remover(a->pDir, v);
         }
         else
         {
-            if ((a->esq == NULL) && (a->dir == NULL))
+            if ((a->pEsq == NULL) && (a->pDir == NULL))
             {
                 free(a);
                 a = NULL;
             }
-            else if (a->dir == NULL)
+            else if (a->pDir == NULL)
             {
                 Arvore *tmp = a;
-                a = a->esq;
+                a = a->pEsq;
                 free(tmp);
             }
-            else if (a->esq == NULL)
+            else if (a->pEsq == NULL)
             {
                 Arvore *tmp = a;
-                a = a->dir;
+                a = a->pDir;
                 free(tmp);
             }
             else
             {
-                Arvore *tmp = a->esq;
-                while (tmp->dir != NULL)
+                Arvore *tmp = a->pEsq;
+                while (tmp->pDir != NULL)
                 {
-                    tmp = tmp->dir;
+                    tmp = tmp->pDir;
                 }
-                a->info = tmp->info;
-                tmp->info = v;
-                a->esq = Remover(a->esq, v);
+                a->chave = tmp->chave;
+                tmp->chave = v;
+                a->pEsq = Remover(a->pEsq, v);
             }
         }
     }
@@ -104,33 +104,7 @@ void imprime_crescente(Arvore *arv)
 {
     if (arv != NULL)
     {
-        printf("%d, ", min(arv));
-        imprime_decrescente(Remover(arv, min(arv)));
+        printf("%d\n", min(arv));
+        imprime_crescente(Remover(arv, min(arv)));
     }
 }
-/*
-struct No {
- int Chave;
- struct No *pEsq, *pDir;
-int FatBal;
-}
-ArvBin* cria_ArvBin(){
-    ArvBin*raiz = (ArvBin*) malloc(sizeof(ArvBin));
-    if(raiz !=NULL)
-        *raiz = NULL;
-        return raiz;
-
-
-}
-int insere_ArvBin(ArvBin *raiz, int valor){
-    if(raiz == NULL)
-    return 0;
-    struct NO* novo;
-    novo = (struct NO*) malloc(sizeof(struct NO));
-    if (novo == NULL)
-    return 0; 
-    novo->Chave = valor;
-    novo->pDir = NULL;
-    novo->pEsq = NULL;
-
-}*/
