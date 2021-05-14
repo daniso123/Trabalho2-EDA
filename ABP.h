@@ -7,6 +7,7 @@ typedef struct _arvore
     int chave;
     struct _arvore *pEsq;
     struct _arvore *pDir;
+    int FatBal;
 } Arvore;
 
 Arvore *cria_arv_vazia();

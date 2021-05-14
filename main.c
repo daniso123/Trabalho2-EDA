@@ -9,17 +9,15 @@ int main()
     char linha[255];
     FILE *ABP = NULL;
     Arvore *a = cria_arv_vazia();
-    /*char c = '1';
-    int a = c - '0';*/
     char *resultado;
     int valor;
 
     do
     {
-        printf("\n###########################");
+        printf("\n#################################");
         printf("\n");
         printf("\nA - Criar árvore\n");
-        printf("\nB - Calcula Fator de Balanceamento\n");
+        //printf("\nB - Calcula Fator de Balanceamento\n");
         printf("\nC - Imprime ABP:\n");
         printf("\nD - Sair:\n");
 
@@ -55,18 +53,38 @@ int main()
                 fclose(ABP);
             }
             break;
-        case 'B':
-            printf("\nCalcular: ");
-            scanf("%s", fileName);
-            break;
+        /*case 'B':
+            if (a == NULL)
+            {
+                printf("Primeiro é necessário criar uma árvore\n");
+                break;
+            }
+            else
+            {
+                printf("\nCalcular: ");
+                scanf("%s", fileName);
+                break;
+            }*/
         case 'C':
-            imprime_crescente(a);
-            break;
+            if (a == NULL)
+            {
+                printf("Primeiro é necessário criar uma árvore\n");
+                break;
+            }
+            else
+            {
+                imprime_crescente(a);
+                break;
+            }
         }
 
     } while (opcao != 'D');
-    if (a != NULL)
-        free(a);
-    printf("\n\n ----- Sistema Encerrado ----- \n\n");
-    return 0;
-}
+    if (a == NULL)
+    {
+        printf("Primeiro é necessário criar uma árvore\n");
+    }
+        else {
+            free(a);}
+        printf("\n\n ----- Sistema Encerrado ----- \n\n");
+        return 0;
+    }
