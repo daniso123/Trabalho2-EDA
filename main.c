@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ABP.c"
+#include "balanceamento.c"
 
 int main()
 {
@@ -9,17 +10,19 @@ int main()
     char linha[255];
     FILE *ABP = NULL;
     Arvore *a = cria_arv_vazia();
+    Arvore *raiz;
     char *resultado;
     int valor;
+    int cal;
 
     do
     {
         printf("\n#################################");
         printf("\n");
         printf("\nA - Criar árvore\n");
-        //printf("\nB - Calcula Fator de Balanceamento\n");
-        printf("\nC - Imprime ABP:\n");
-        printf("\nD - Sair:\n");
+        printf("\nB - Calcula Fator de Balanceamento\n");
+        printf("\nC - Imprime ABP\n");
+        printf("\nD - Sair\n");
 
         printf("\nOpção: ");
         scanf("\n%c", &opcao);
@@ -53,7 +56,7 @@ int main()
                 fclose(ABP);
             }
             break;
-        /*case 'B':
+        case 'B':
             if (a == NULL)
             {
                 printf("Primeiro é necessário criar uma árvore\n");
@@ -61,10 +64,18 @@ int main()
             }
             else
             {
-                printf("\nCalcular: ");
-                scanf("%s", fileName);
-                break;
-            }*/
+                ABP = fopen("ABP.csv", "r");
+                while (!feof(ABP))
+                {
+                    resultado = fgets(linha, 255, ABP);
+                    if (resultado)
+                        valor = atoi(linha);
+                    cal = fatorBalanceamento_NO(a, valor);
+                    printf("%d\n", cal);
+                    printf("\nCalculado com sucesso!\n");
+                    break;
+                }
+            }
         case 'C':
             if (a == NULL)
             {
@@ -73,7 +84,7 @@ int main()
             }
             else
             {
-                imprime_crescente(a);
+                imprime_crescente(raiz);
                 break;
             }
         }
@@ -83,8 +94,10 @@ int main()
     {
         printf("Primeiro é necessário criar uma árvore\n");
     }
-        else {
-            free(a);}
-        printf("\n\n ----- Sistema Encerrado ----- \n\n");
-        return 0;
+    else
+    {
+        free(a);
     }
+    printf("\n\n ----- Sistema Encerrado ----- \n\n");
+    return 0;
+}
